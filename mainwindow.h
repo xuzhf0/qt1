@@ -24,6 +24,9 @@
 #include <QPlainTextEdit>
 #include <QFormLayout>
 #include <QComboBox>
+#include <QRadioButton>
+#include <QCheckBox>
+
 class MyWidget :public QWidget{
 public:
     MyWidget(QWidget *parent =Q_NULLPTR):QWidget(parent){}
@@ -42,6 +45,9 @@ private:
     void createMenus();
     void createActions();
     void createButtons();
+    QGroupBox *initReceivePart();
+    QGroupBox *initSendPart();
+    QGroupBox *initSerialSettingPart();
     void init();
     void initUI();
     QPushButton *btn1;
@@ -63,8 +69,9 @@ private:
     QLineEdit *lineEdit1;
     QPlainTextEdit *serialInput;
 
-    QGroupBox *group1;
-    QGroupBox *group2;
+    QGroupBox *groupBoxSerialSetting;
+    QGroupBox *groupBoxSend;
+       QGroupBox *groupBoxReceive;
     QWidget *centerWidget;
 
     QFormLayout *serialSetting;
@@ -84,6 +91,12 @@ private:
     QComboBox *serialDateBitBox;
     QComboBox *serialFlowCtrlBox;
 
+    QRadioButton *showasc;
+    QRadioButton *showhex;
+
+    QCheckBox *autoLineBreak;
+    QCheckBox *autoSend;
+    QCheckBox *showRecTime;
 
 };
 
