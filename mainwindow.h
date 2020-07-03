@@ -22,12 +22,13 @@
 #include <QHBoxLayout>
 #include <QTextEdit>
 #include <QPlainTextEdit>
-
+#include <QFormLayout>
+#include <QComboBox>
 class MyWidget :public QWidget{
 public:
     MyWidget(QWidget *parent =Q_NULLPTR):QWidget(parent){}
-    ~MyWidget(){}
-}
+    virtual ~MyWidget(){qDebug()<<"~MyWidget()";}
+};
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -65,6 +66,25 @@ private:
     QGroupBox *group1;
     QGroupBox *group2;
     QWidget *centerWidget;
+
+    QFormLayout *serialSetting;
+    QFormLayout *serialShow;
+
+    QLabel *serialLable;
+    QLabel *serialBaudRate;
+    QLabel *serialStopBit;
+    QLabel *serialcheckMode;
+    QLabel *serialDateBit;
+    QLabel *serialFlowCtrl;
+
+    QComboBox *serialLableBox;
+    QComboBox *serialBaudRateBox;
+    QComboBox *serialStopBitBox;
+    QComboBox *serialcheckModeBox;
+    QComboBox *serialDateBitBox;
+    QComboBox *serialFlowCtrlBox;
+
+
 };
 
 #endif // MAINWINDOW_H

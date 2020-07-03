@@ -47,46 +47,90 @@ void MainWindow::createMenus()
 }
 void MainWindow::init()
 {
+    initUI();
+
+}
+
+void MainWindow::f1()
+{
+    static int i=0;
+    l1->setText(QString::number(++i));
+}
+void MainWindow::initUI()
+{
     createButtons();
     createActions();
     createMenus();
 
-    grid1 = new QGridLayout();
+    group1 = new QGroupBox("串口设置");
+    group2 = new QGroupBox("接收设置");
+    group1->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    group2->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+
+
+    serialLable =new QLabel("串口");
+    serialBaudRate  =new QLabel("波特率");
+    serialDateBit =new QLabel("数据位");
+    serialStopBit =new QLabel("停止位");
+    serialFlowCtrl = new QLabel("流控");
+    serialcheckMode = new QLabel("校验位");
+
+    serialLableBox =new QComboBox;
+    serialBaudRateBox =new QComboBox;
+    serialDateBitBox =new QComboBox;
+    serialStopBitBox =new QComboBox;
+    serialFlowCtrlBox =new QComboBox;
+    serialcheckModeBox =new QComboBox;
+
+    serialSetting =new QFormLayout();
+    serialShow = new QFormLayout();
+
+    serialSetting->addRow(serialLable,serialLableBox);
+    serialSetting->addRow(serialBaudRate,serialBaudRateBox);
+    serialSetting->addRow(serialDateBit,serialDateBitBox);
+    serialSetting->addRow(serialStopBit,serialStopBitBox);
+    serialSetting->addRow(serialFlowCtrl,serialFlowCtrlBox);
+    serialSetting->addRow(serialcheckMode,serialcheckModeBox);
+
+
+
+
+
+
+
     textBrowser = new QTextBrowser();
     textEdit = new QTextEdit();
     lineEdit1 = new QLineEdit;
     serialInput = new QPlainTextEdit;
 //    serialInput->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     serialInput->setMaximumHeight(40);
+
+    grid1 = new QGridLayout();
     grid1->addWidget(textBrowser,0,2,3,3);
     grid1->addWidget(serialInput,3,2,1,2);
     grid1->addWidget(sendBtn,3,4,1,1);
 
+    group1->setLayout(serialSetting);
 
 
-    group1 = new QGroupBox("Group1");
-     group2 = new QGroupBox("Group2");
-    group1->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
-//    QVBoxLayout *vb1 =new QVBoxLayout();
     QHBoxLayout *vb1 = new QHBoxLayout();
     QHBoxLayout *vb2 = new QHBoxLayout();
     vb1 ->addWidget(btn1);
     vb1->addWidget(btn2);
-    group1->setLayout(vb1);
-    group2->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    //group1->setLayout(vb1);
 
     vb2->addWidget(clearBtn);
     //vb2->addWidget(sendBtn);
-    group2->setLayout(vb2);
+    //group2->setLayout(vb2);
 
-    grid1->addWidget(group1,0,0,2,1);
-    grid1->addWidget(group2,1,0,2,1);
+    grid1->addWidget(group1,0,0);
     grid1->setAlignment(group1,Qt::AlignTop );
-    grid1->setAlignment(group2,Qt::AlignTop );
+
+
+//    grid1->addWidget(group2,1,0,2,1);
+//    grid1->setAlignment(group2,Qt::AlignTop );
+
     grid1->setAlignment(sendBtn,Qt::AlignTop );
-//    QWidget *w1 = new QWidget(this);
-//    w1->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-//    grid1->addWidget(w1,1,0,2,3);
 
 
 
@@ -101,17 +145,6 @@ void MainWindow::init()
     centerWidget = new QWidget(this);
     setCentralWidget(centerWidget);
     centerWidget->setLayout(grid1);
-
-}
-
-void MainWindow::f1()
-{
-    static int i=0;
-    l1->setText(QString::number(++i));
-}
-void MainWindow::initUI()
-{
-
 }
 
 void MainWindow::createButtons()
